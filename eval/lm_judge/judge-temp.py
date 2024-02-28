@@ -76,11 +76,14 @@ def main(args):
     for row in ds:
         final_data.append(row)
 
+    completed_data = []
+
     existing_ds = load_dataset("manishiitg/custom-data", split="train")
     existing_data = {}
     for r in existing_ds:
         hash = r["system"] + r["instruction"] + r["response"]
         existing_data[hash] = r
+        completed_data.append(r)
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
@@ -103,17 +106,15 @@ def main(args):
     default_system_hi = "आप एक सहायक सहायक हैं."
 
     prompts = []
-    completed_data = []
     pending_data = []
     for row in tqdm(final_data):
         messages = []
-
         system = row["system"]
         instruction = row["instruction"]
         response = row["response"]
         hash = system + instruction + response
         if hash in existing_data:
-            completed_data.append(existing_data[hash])
+            continue
         else:
             question = instruction
             if system != default_system_en and system != default_system_hi:
