@@ -70,8 +70,9 @@ def main(args):
 
     ds = load_dataset(
         "manishiitg/data-check", split="train")
-    ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
-    ds = ds.select(range(20000))
+    ds = ds.filter(lambda x: x["lang"] == "hi")
+    # .shuffle()
+    ds = ds.select(range(100))
     final_data = []
     for row in ds:
         final_data.append(row)
@@ -131,8 +132,7 @@ def main(args):
             tokenize=False,
             add_generation_prompt=True
         )
-        tokenized_prompt = tokenizer(
-            prompt, truncation=False, add_special_tokens=False).input_ids
+        tokenized_prompt = tokenizer(prompt).input_ids
         if len(tokenized_prompt) < (8196 - 1024):
             prompts.append(text)
             pending_data.append(row)
