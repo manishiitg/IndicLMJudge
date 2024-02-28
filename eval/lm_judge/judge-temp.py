@@ -76,14 +76,11 @@ def main(args):
     for row in ds:
         final_data.append(row)
 
-    completed_data = []
-
     existing_ds = load_dataset("manishiitg/custom-data", split="train")
     existing_data = {}
     for r in existing_ds:
         hash = r["system"] + r["instruction"] + r["response"]
         existing_data[hash] = r
-        completed_data.append(r)
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
@@ -193,6 +190,14 @@ def main(args):
                     print("text failed", text, -1, e)
         except Exception as e:
             print("failed ", e)
+
+    completed_data = []
+    existing_ds = load_dataset("manishiitg/custom-data", split="train")
+    existing_data = {}
+    for r in existing_ds:
+        hash = r["system"] + r["instruction"] + r["response"]
+        existing_data[hash] = r
+        completed_data.append(r)
 
     final_data = pending_data + completed_data
     dataset = process_and_update_dataset(final_data)
