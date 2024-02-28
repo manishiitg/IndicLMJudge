@@ -133,7 +133,7 @@ def main(args):
         )
         tokenized_prompt = tokenizer(
             prompt, truncation=False, add_special_tokens=False).input_ids
-        if len(tokenized_prompt) < 8196:
+        if len(tokenized_prompt) < (8196 - 1024):
             prompts.append(text)
             pending_data.append(row)
 
