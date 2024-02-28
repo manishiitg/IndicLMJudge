@@ -119,7 +119,7 @@ def main(args):
             question=question, answer=row["response"])
 
         messages = [
-            {"role": "system", "content": "You are a helpful assistant."},
+            # {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
         ]
         text = tokenizer.apply_chat_template(
@@ -127,6 +127,7 @@ def main(args):
             tokenize=False,
             add_generation_prompt=True
         )
+        print(text)
         tokenized_prompt = tokenizer(
             prompt, truncation=False, add_special_tokens=False).input_ids
         if len(tokenized_prompt) < 8196:
