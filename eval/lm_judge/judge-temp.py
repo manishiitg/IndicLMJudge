@@ -77,8 +77,8 @@ def main(args):
         final_data.append(row)
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
-    judge_model = "Qwen/Qwen1.5-7B-Chat"
-    # judge_model = "TheBloke/Mixtral-8x7B-Instruct-v0.1-AWQ"
+    # judge_model = "Qwen/Qwen1.5-7B-Chat"
+    judge_model = "TheBloke/Mixtral-8x7B-Instruct-v0.1-AWQ"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
@@ -88,7 +88,7 @@ def main(args):
         tokenizer_mode="auto",
         tensor_parallel_size=torch.cuda.device_count(),
         # max_num_batched_tokens=4096,
-        # quantization="AWQ",
+        quantization="AWQ",
         max_model_len=8196,
         dtype="float16",
         gpu_memory_utilization=.8
