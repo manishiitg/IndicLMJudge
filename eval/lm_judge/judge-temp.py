@@ -83,7 +83,7 @@ def main(args):
         # existing_data[hash] = True
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
-    judge_model = "Qwen/Qwen1.5-7B-Chat-AWQ"
+    judge_model = "Qwen/Qwen1.5-7B-Chat"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
@@ -93,11 +93,10 @@ def main(args):
         tokenizer_mode="auto",
         tensor_parallel_size=torch.cuda.device_count(),
         # max_num_batched_tokens=4096,
-        quantization="AWQ",
+        # quantization="AWQ",
         max_model_len=8196,
         dtype="float16",
-        gpu_memory_utilization=.8
-
+        # gpu_memory_utilization=.8
     )
 
     default_system_en = "You are a helpful assistant."
