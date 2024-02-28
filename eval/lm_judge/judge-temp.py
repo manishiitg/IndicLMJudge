@@ -152,7 +152,7 @@ def main(args):
         json.dump(final_data, fout, indent=4)
 
     for idx, text in enumerate(outputs):
-        print("text", text , "prompt", prompts[idx])
+        # print("text", text , "prompt", prompts[idx])
         try:
             if "```" in text:
                 text = text.replace("```json", "")
