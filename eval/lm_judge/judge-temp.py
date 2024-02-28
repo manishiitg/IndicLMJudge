@@ -80,7 +80,7 @@ def main(args):
     existing_data = {}
     for r in existing_ds:
         hash = r["system"] + r["instruction"] + r["response"]
-        # existing_data[hash] = True
+        existing_data[hash] = True
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
