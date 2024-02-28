@@ -76,6 +76,11 @@ def main(args):
     for row in ds:
         final_data.append(row)
 
+    existing_ds = load_dataset("manishiitg/custom-data", split="train")
+    existing_data = {}
+    for r in existing_ds:
+        r["system"] + r["instruction"] + r["response"]
+
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     # judge_model = "Qwen/Qwen1.5-7B-Chat"
     judge_model = "TheBloke/Mixtral-8x7B-Instruct-v0.1-AWQ"
@@ -120,7 +125,7 @@ def main(args):
         text = tokenizer.apply_chat_template(
             messages,
             tokenize=False,
-            add_generation_prompt=False
+            add_generation_prompt=True
         )
         tokenized_prompt = tokenizer(
             prompt, truncation=False, add_special_tokens=False).input_ids
