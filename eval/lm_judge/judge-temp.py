@@ -75,7 +75,7 @@ def main(args):
 
     new_data = []
     final_data = []
-    no_rows = 10000
+    no_rows = 100
 
     for r in ds:
         if "processed" not in r:
@@ -204,6 +204,8 @@ def main(args):
                     print("text failed", text, -1, e)
         except Exception as e:
             print("failed ", e)
+        
+        del pending_data[idx]["processed"]
 
     completed_data = []
     existing_ds = load_dataset("manishiitg/custom-data", split="train")
