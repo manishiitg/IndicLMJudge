@@ -71,7 +71,7 @@ def main(args):
     ds = load_dataset(
         "manishiitg/data-check", split="train")
     ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
-    ds = ds.select(range(10000))
+    ds = ds.select(range(1000))
     final_data = []
     for row in ds:
         final_data.append(row)
@@ -80,7 +80,7 @@ def main(args):
     existing_data = {}
     for r in existing_ds:
         hash = r["system"] + r["instruction"] + r["response"]
-        existing_data[hash] = True
+        existing_data[hash] = r
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
@@ -113,28 +113,28 @@ def main(args):
         response = row["response"]
         hash = system + instruction + response
         if hash in existing_data:
-            continue
+            completed_data.append(existing_data[hash])
+        else:
+            question = instruction
+            if system != default_system_en and system != default_system_hi:
+                question = system + "\n\n" + instruction
 
-        question = instruction
-        if system != default_system_en and system != default_system_hi:
-            question = system + "\n\n" + instruction
+            prompt = get_lm_judge_rating_prompt(
+                question=question, answer=row["response"])
 
-        prompt = get_lm_judge_rating_prompt(
-            question=question, answer=row["response"])
-
-        messages = [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ]
-        text = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True
-        )
-        tokenized_prompt = tokenizer(prompt).input_ids
-        if len(tokenized_prompt) < (8196 - 1024):
-            prompts.append(text)
-            pending_data.append(row)
+            messages = [
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ]
+            text = tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True
+            )
+            tokenized_prompt = tokenizer(prompt).input_ids
+            if len(tokenized_prompt) < (8196 - 1024):
+                prompts.append(text)
+                pending_data.append(row)
 
     outputs = eval_hf_model(args, model, tokenizer, prompts)
 
