@@ -83,7 +83,7 @@ def main(args):
         # existing_data[hash] = True
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
-    judge_model = "Qwen/Qwen1.5-7B-Chat"
+    judge_model = "Qwen/Qwen1.5-7B-Chat-AWQ"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
