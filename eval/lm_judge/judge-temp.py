@@ -76,14 +76,14 @@ def main(args):
     for row in ds:
         final_data.append(row)
 
-    # existing_ds = load_dataset("manishiitg/custom-data", split="train")
-    # existing_data = {}
-    # for r in existing_ds:
-    #     r["system"] + r["instruction"] + r["response"]
+    existing_ds = load_dataset("manishiitg/custom-data", split="train")
+    existing_data = {}
+    for r in existing_ds:
+        hash = r["system"] + r["instruction"] + r["response"]
+        existing_data[hash] = True
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
-    # judge_model = "Qwen/Qwen1.5-7B-Chat"
-    judge_model = "TheBloke/Mixtral-8x7B-Instruct-v0.1-AWQ"
+    judge_model = "Qwen/Qwen1.5-7B-Chat"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
@@ -111,6 +111,11 @@ def main(args):
 
         system = row["system"]
         instruction = row["instruction"]
+        response = row["response"]
+        hash = system + instruction + response
+        if hash in existing_data:
+            continue
+
         question = instruction
         if system != default_system_en and system != default_system_hi:
             question = system + "\n\n" + instruction
@@ -119,7 +124,7 @@ def main(args):
             question=question, answer=row["response"])
 
         messages = [
-            # {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
         ]
         text = tokenizer.apply_chat_template(
@@ -127,7 +132,6 @@ def main(args):
             tokenize=False,
             add_generation_prompt=True
         )
-        print(text)
         tokenized_prompt = tokenizer(
             prompt, truncation=False, add_special_tokens=False).input_ids
         if len(tokenized_prompt) < 8196:
