@@ -76,10 +76,10 @@ def main(args):
     for row in ds:
         final_data.append(row)
 
-    existing_ds = load_dataset("manishiitg/custom-data", split="train")
-    existing_data = {}
-    for r in existing_ds:
-        r["system"] + r["instruction"] + r["response"]
+    # existing_ds = load_dataset("manishiitg/custom-data", split="train")
+    # existing_data = {}
+    # for r in existing_ds:
+    #     r["system"] + r["instruction"] + r["response"]
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     # judge_model = "Qwen/Qwen1.5-7B-Chat"
