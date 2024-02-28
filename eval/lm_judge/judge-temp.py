@@ -9,6 +9,7 @@ import vllm
 from datasets import Dataset
 import torch
 import re
+import time
 
 # in this we simply save prompts outputs to a huggingface repo
 # https://github.com/lm-sys/FastChat/blob/main/fastchat/llm_judge/data/judge_prompts.jsonl
@@ -69,12 +70,25 @@ def eval_hf_model(args, model, tokenizer, prompts):
 def main(args):
 
     ds = load_dataset(
-        "manishiitg/data-check", split="train")
+        "manishiitg/data-check", split="train", cache_dir="temp-" + str(time.time()))
     ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
-    ds = ds.select(range(10000))
+
+    new_data = []
     final_data = []
-    for row in ds:
-        final_data.append(row)
+    no_rows = 10000
+
+    for r in ds:
+        if "processed" not in r:
+            r["processed"] = False
+
+        if not r["processed"] and len(final_data) < no_rows:
+            final_data.append(r)
+            r["processed"] = True
+
+        new_data.append(r)
+
+    dataset = process_and_update_dataset(new_data)
+    dataset.push_to_hub("manishiitg/data-check", private=False)
 
     existing_ds = load_dataset("manishiitg/custom-data", split="train")
     existing_data = {}
