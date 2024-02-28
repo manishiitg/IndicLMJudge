@@ -72,7 +72,7 @@ def main(args):
         "manishiitg/data-check", split="train")
     ds = ds.filter(lambda x: x["lang"] == "hi")
     # .shuffle()
-    ds = ds.select(range(100))
+    ds = ds.select(range(1000))
     final_data = []
     for row in ds:
         final_data.append(row)
