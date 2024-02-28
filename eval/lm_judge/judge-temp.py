@@ -45,50 +45,6 @@ Only respond in json format as follows:
 }
 Response format should be parsable by json.loads
 """
-# If an evaluation criteria is not valid for a question, add the rating as -1
-# "helpfulness": {
-#     "explanation" : "<explanation>",
-#     "rating" : "<rating>",
-#   },
-#   "relevance": {
-#     "explanation" : "<explanation>",
-#     "rating" : "<rating>",
-#   },
-#   "accuracy": {
-#     "explanation" : "<explanation>",
-#     "rating" : "<rating>",
-#   },
-#   "depth": {
-#     "explanation" : "<explanation>",
-#     "rating" : "<rating>",
-#   },
-#   "creativity": {
-#     "explanation" : "<explanation>",
-#     "rating" : "<rating>",
-#   },
-#   "level_of_detail": {
-#     "explanation" : "<explanation>",
-#     "rating" : "<rating>",
-#   },
-
-# prompt = """
-# Please act as an impartial judge and evaluate the quality of the response provided by an AI assistant to the user question displayed below.
-# Your evaluation should consider factors such as the helpfulness, relevance, accuracy, depth, creativity, and level of detail of the response.
-# Begin your evaluation by providing a short explanation. Be as objective as possible.
-
-# [Question]
-# {question}
-
-# [The Start of Assistant's Answer]
-# {answer}
-# [The End of Assistant's Answer]
-
-# After providing your explanation, you must rate the response on a scale of 1 to 10 by strictly following this format:
-# Explanation: <explanation_for_rating>
-
-# Overall Rating: <overall_rating>
-# """
-
 
 def get_lm_judge_rating_prompt(question, answer):
     prompt_1 = prompt.replace("{question}", question)
