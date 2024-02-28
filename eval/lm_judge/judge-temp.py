@@ -40,6 +40,7 @@ Only respond in json format as follows:
 Response format should be parsable by json.loads
 """
 
+
 def get_lm_judge_rating_prompt(question, answer):
     prompt_1 = prompt.replace("{question}", question)
     prompt_1 = prompt_1.replace("{answer}", answer)
@@ -77,7 +78,7 @@ def main(args):
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
-    # judge_model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    # judge_model = "TheBloke/Mixtral-8x7B-Instruct-v0.1-AWQ"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
@@ -134,7 +135,8 @@ def main(args):
     for output in outputs:
         prompt = prompts[ix]
         final_data.append({
-            prompt, output
+            "prompt": prompt,
+            "output": output
         })
         ix += 1
 
