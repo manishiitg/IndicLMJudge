@@ -37,7 +37,8 @@ Only respond in json format as follows:
 {
   "overall_rating": {
     "explanation" : "<explanation>",
-    "rating" : "<rating>"
+    "rating" : "<rating>",
+    "category" : "<category>"
   },
 }
 Response format should be parsable by json.loads
