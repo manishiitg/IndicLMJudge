@@ -99,7 +99,7 @@ def main(args):
         hash = ""
         response = row["messages"].pop()
         for r in row["messages"]:
-            hash += row["content"]
+            hash += r["content"]
         existing_data[hash] = row
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
