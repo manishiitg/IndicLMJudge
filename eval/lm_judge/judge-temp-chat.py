@@ -70,7 +70,7 @@ def eval_hf_model(args, model, tokenizer, prompts):
 def main(args):
 
     ds = load_dataset(
-        "manishiitg/custom-data-chat", split="train", cache_dir="temp-" + str(time.time()))
+        "manishiitg/check-data-chat", split="train", cache_dir="temp-" + str(time.time()))
     ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
 
     new_data = []
