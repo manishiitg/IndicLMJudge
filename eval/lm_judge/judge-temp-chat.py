@@ -28,8 +28,7 @@ Please rate the response on a scale of 1 to 10 for each of the following evaluat
 
 Relevance: The extent to which the response is related to the user's question or topic.
 Accuracy: The correctness of the information provided in the response.
-
-Rate question or responeses related to programing lowest as programing cannot be done in hindi language. 
+Programming: If question/answer is related to programming, how well is the code written. 
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
 
@@ -130,16 +129,16 @@ def main(args):
 
         for r in row["messages"]:
             hash += r["content"]
-        
-        if False: # if hash in existing_data:
+
+        if False:  # if hash in existing_data:
             continue
         else:
             conversation = ""
             for r in row["messages"]:
                 content = r["content"]
-                if content == default_system_en or content == default_system_en:
+                if content == default_system_en or content == default_system_hi:
                     continue
-                
+
                 conversation += r["role"] + " : " + r["content"]
 
             prompt = get_lm_judge_rating_prompt(
@@ -175,7 +174,7 @@ def main(args):
     #     json.dump(final_data, fout, indent=4)
 
     for idx, text in enumerate(outputs):
-        print("text", text , "prompt", prompts[idx])
+        print("prompt", prompts[idx], "text", text)
         try:
             if "```" in text:
                 text = text.replace("```json", "")
