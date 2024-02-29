@@ -77,15 +77,15 @@ def main(args):
     final_data = []
     no_rows = 100
 
-    # for r in ds:
-    #     if "processed" not in r:
-    #         r["processed"] = False
+    for r in ds:
+        if "processed" not in r:
+            r["processed"] = False
 
-    #     if not r["processed"] and len(final_data) < no_rows:
-    #         final_data.append(r)
-    #         r["processed"] = True
+        if not r["processed"] and len(final_data) < no_rows:
+            final_data.append(r)
+            r["processed"] = True
 
-    #     new_data.append(r)
+        new_data.append(r)
 
     # dataset = process_and_update_dataset(new_data)
     # dataset.push_to_hub("manishiitg/custom-data-chat", private=False)
