@@ -72,7 +72,7 @@ def eval_hf_model(args, model, tokenizer, prompts):
 def main(args):
 
     ds = load_dataset(
-        "manishiitg/check-data-chat", split="train", cache_dir="temp-" + str(time.time()))
+        "manishiitg/check-data-chat", split="train")
     # ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
 
     new_data = []
@@ -102,7 +102,7 @@ def main(args):
     #     existing_data[hash] = row
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
-    judge_model = "Qwen/Qwen1.5-7B-Chat"
+    judge_model = "Qwen/Qwen1.5-14B-Chat"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
