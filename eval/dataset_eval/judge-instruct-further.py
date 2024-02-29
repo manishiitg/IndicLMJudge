@@ -81,7 +81,7 @@ def main(args):
 
     new_data = []
     final_data = []
-    no_rows = 10
+    no_rows = 200
 
     for r in ds:
         if "processed" not in r:
