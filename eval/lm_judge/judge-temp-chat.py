@@ -94,14 +94,15 @@ def main(args):
     dataset = process_and_update_dataset(new_data)
     dataset.push_to_hub("manishiitg/check-data-chat", private=False)
 
-    existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
+
     existing_data = {}
-    for row in existing_ds:
-        hash = ""
-        response = row["messages"].pop()
-        for r in row["messages"]:
-            hash += r["content"]
-        existing_data[hash] = row
+    # existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
+    # for row in existing_ds:
+    #     hash = ""
+    #     response = row["messages"].pop()
+    #     for r in row["messages"]:
+    #         hash += r["content"]
+    #     existing_data[hash] = row
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
@@ -221,10 +222,10 @@ def main(args):
         del pending_data[idx]["processed"]
 
     completed_data = []
-    existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
-    existing_data = {}
-    for r in existing_ds:
-        completed_data.append(r)
+    # existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
+    # existing_data = {}
+    # for r in existing_ds:
+    #     completed_data.append(r)
 
     final_data = pending_data + completed_data
     dataset = process_and_update_dataset(final_data)
