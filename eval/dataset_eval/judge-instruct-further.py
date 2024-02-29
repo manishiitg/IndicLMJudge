@@ -81,7 +81,7 @@ def main(args):
 
     new_data = []
     final_data = []
-    no_rows = 200
+    no_rows = 10000
 
     for r in ds:
         if "processed" not in r:
@@ -160,7 +160,7 @@ def main(args):
 
     for idx, text in enumerate(outputs):
 
-        print("prompt", prompts[idx], "text", text, final_data[idx])
+        # print("prompt", prompts[idx], "text", text, final_data[idx])
 
         try:
             if "```" in text:
