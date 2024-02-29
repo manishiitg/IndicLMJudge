@@ -73,8 +73,8 @@ def eval_hf_model(args, model, tokenizer, prompts):
 
 def main(args):
 
-    rated_repo = "manishiitg/data-check-instruct-futher-rated"
-    base_repo = "manishiitg/data-check-instruct-further"
+    base_repo = "manishiitg/data-check-instruct-futher"
+    rated_repo = base_repo + "-rated"
     ds = load_dataset(
         base_repo, split="train", cache_dir="temp-" + str(time.time()))
     # ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
