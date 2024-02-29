@@ -160,6 +160,8 @@ def main(args):
 
     for idx, text in enumerate(outputs):
 
+        print("prompt", prompts[idx], "text", text, final_data[idx])
+
         try:
             if "```" in text:
                 text = text.replace("```json", "")
@@ -174,7 +176,7 @@ def main(args):
                 pending_data[idx]["judgement_pending"] = False
                 pending_data[idx]["rated_by"] = judge_model
             except TypeError as e:
-                print("text", text, "prompt", prompts[idx])
+                print("prompt", prompts[idx], "text", text)
                 pending_data[idx]["judgement"] = text + "Exception:" + str(e)
                 pending_data[idx]["rating"] = -1
                 pending_data[idx]["judgement_pending"] = False
@@ -191,7 +193,7 @@ def main(args):
                     pending_data[idx]["judgement_pending"] = False
                     pending_data[idx]["rated_by"] = judge_model
                 else:
-                    print("text", text, "prompt", prompts[idx])
+                    print("prompt", prompts[idx], "text", text)
                     pending_data[idx]["judgement"] = text + \
                         "Exception:" + str(e)
                     pending_data[idx]["rating"] = -1
