@@ -31,7 +31,7 @@ Accuracy: The correctness of the information provided in the response.
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
 
-Also classify the conversation into a category like coding, general, roleplay, writing, wordgame, joke, rp, math, others
+Also classify the conversation into a category like coding, general, language, roleplay, writing, wordgame, joke, rp, math, others
 
 Only respond in json format as follows:
 {
@@ -78,7 +78,7 @@ def main(args):
 
     new_data = []
     final_data = []
-    no_rows = 10
+    no_rows = 100
 
     for r in ds:
         if "processed" not in r:
@@ -90,17 +90,17 @@ def main(args):
 
         new_data.append(r)
 
-    # dataset = process_and_update_dataset(new_data)
-    # dataset.push_to_hub("manishiitg/custom-data-chat", private=False)
+    dataset = process_and_update_dataset(new_data)
+    dataset.push_to_hub("manishiitg/custom-data-chat", private=False)
 
-    # existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
-    # existing_data = {}
-    # for row in existing_ds:
-    #     hash = ""
-    #   response = row["messages"].pop()
-    #     for r in row["messages"]:
-    #         hash += row["content"]
-    #     existing_data[hash] = row
+    existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
+    existing_data = {}
+    for row in existing_ds:
+        hash = ""
+        response = row["messages"].pop()
+        for r in row["messages"]:
+            hash += row["content"]
+        existing_data[hash] = row
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat"
@@ -132,7 +132,7 @@ def main(args):
         for r in row["messages"]:
             hash += r["content"]
 
-        if False:  # if hash in existing_data:
+        if hash in existing_data:
             continue
         else:
             conversation = ""
