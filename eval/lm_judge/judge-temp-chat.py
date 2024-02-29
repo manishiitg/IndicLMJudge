@@ -28,9 +28,10 @@ Please rate the response on a scale of 1 to 10 for each of the following evaluat
 
 Relevance: The extent to which the response is related to the user's question or topic.
 Accuracy: The correctness of the information provided in the response.
-Programming: If question/answer is related to programming, how well is the code written. 
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
+
+Also classify the conversation into a category from orca, coding, general, roleplay, writing, wordgame, joke, rp, math, others
 
 Only respond in json format as follows:
 {
