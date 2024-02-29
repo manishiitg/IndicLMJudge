@@ -16,6 +16,7 @@ import time
 
 prompt = """
 As an impartial evaluator, please assess the quality of the AI assistant's answer based on a conversation with user. 
+The conversation is in hindi language.
 Your evaluation should take into account several factors, including relevance, accuracy. 
 
 [Conversation]
@@ -28,6 +29,7 @@ Please rate the response on a scale of 1 to 10 for each of the following evaluat
 Relevance: The extent to which the response is related to the user's question or topic.
 Accuracy: The correctness of the information provided in the response.
 
+Rate question or responeses related to programing lowest as programing cannot be done in hindi language. 
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
 
