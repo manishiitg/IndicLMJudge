@@ -31,7 +31,7 @@ Accuracy: The correctness of the information provided in the response.
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
 
-Also classify the conversation into a category from orca, coding, general, roleplay, writing, wordgame, joke, rp, math, others
+Also classify the conversation into a category like coding, general, roleplay, writing, wordgame, joke, rp, math, others
 
 Only respond in json format as follows:
 {
