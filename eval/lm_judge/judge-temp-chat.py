@@ -94,6 +94,7 @@ def main(args):
     # existing_data = {}
     # for row in existing_ds:
     #     hash = ""
+    #   response = row["messages"].pop()
     #     for r in row["messages"]:
     #         hash += row["content"]
     #     existing_data[hash] = row
@@ -122,6 +123,9 @@ def main(args):
     pending_data = []
     for row in tqdm(final_data):
         hash = ""
+
+        response = row["messages"].pop()
+
         for r in row["messages"]:
             hash += r["content"]
         
@@ -137,7 +141,7 @@ def main(args):
                 conversation += r["role"] + " : " + r["content"]
 
             prompt = get_lm_judge_rating_prompt(
-                conversation=conversation, answer=row["response"])
+                conversation=conversation, answer=response["content"])
 
             messages = [
                 {"role": "system", "content": "You are a helpful assistant."},
