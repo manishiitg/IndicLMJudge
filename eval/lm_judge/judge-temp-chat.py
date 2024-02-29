@@ -221,10 +221,10 @@ def main(args):
         del pending_data[idx]["processed"]
 
     completed_data = []
-    # existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
-    # existing_data = {}
-    # for r in existing_ds:
-    #     completed_data.append(r)
+    existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
+    existing_data = {}
+    for r in existing_ds:
+        completed_data.append(r)
 
     final_data = pending_data + completed_data
     dataset = process_and_update_dataset(final_data)
