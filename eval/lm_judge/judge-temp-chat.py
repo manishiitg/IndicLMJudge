@@ -15,7 +15,7 @@ import time
 # https://github.com/lm-sys/FastChat/blob/main/fastchat/llm_judge/data/judge_prompts.jsonl
 
 prompt = """
-As an impartial evaluator, please assess the quality of the AI assistant's answer based on a conversation with user. 
+As an impartial evaluator, please assess the quality of the AI assistant's conversation and answer with user. 
 The conversation is in hindi language.
 Your evaluation should take into account several factors, including relevance, accuracy. 
 
