@@ -178,7 +178,7 @@ def main(args):
     #     json.dump(final_data, fout, indent=4)
 
     for idx, text in enumerate(outputs):
-        print("prompt", prompts[idx], "text", text)
+        # print("prompt", prompts[idx], "text", text)
         try:
             if "```" in text:
                 text = text.replace("```json", "")
@@ -223,7 +223,6 @@ def main(args):
 
     completed_data = []
     existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
-    existing_data = {}
     for r in existing_ds:
         completed_data.append(r)
 
