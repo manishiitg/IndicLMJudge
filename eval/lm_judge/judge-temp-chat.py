@@ -71,7 +71,7 @@ def main(args):
 
     ds = load_dataset(
         "manishiitg/check-data-chat", split="train", cache_dir="temp-" + str(time.time()))
-    ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
+    # ds = ds.filter(lambda x: x["lang"] == "hi").shuffle()
 
     new_data = []
     final_data = []
