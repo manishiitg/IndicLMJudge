@@ -92,7 +92,7 @@ def main(args):
         new_data.append(r)
 
     dataset = process_and_update_dataset(new_data)
-    dataset.push_to_hub("manishiitg/custom-data-chat", private=False)
+    dataset.push_to_hub("manishiitg/check-data-chat", private=False)
 
     existing_ds = load_dataset("manishiitg/custom-data-chat", split="train")
     existing_data = {}
