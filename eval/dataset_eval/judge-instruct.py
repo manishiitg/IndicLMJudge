@@ -30,12 +30,15 @@ Accuracy: The correctness of the information provided in the response.
 
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
+Also classify the conversation into a category like coding, general, language, roleplay, writing, wordgame, joke, rp, math
+If category is not from above list, generate a category yourself.
 
 Only respond in json format as follows:
 {
   "overall_rating": {
     "explanation" : "<explanation>",
-    "rating" : "<rating>"
+    "rating" : "<rating>",
+    "category" : "<category>"
   },
 }
 Response format should be parsable by json.loads
