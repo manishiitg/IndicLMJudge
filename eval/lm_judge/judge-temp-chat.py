@@ -75,7 +75,7 @@ def main(args):
 
     new_data = []
     final_data = []
-    no_rows = 100
+    no_rows = 10
 
     for r in ds:
         if "processed" not in r:
@@ -173,7 +173,7 @@ def main(args):
     #     json.dump(final_data, fout, indent=4)
 
     for idx, text in enumerate(outputs):
-        # print("text", text , "prompt", prompts[idx])
+        print("text", text , "prompt", prompts[idx])
         try:
             if "```" in text:
                 text = text.replace("```json", "")
