@@ -200,18 +200,6 @@ def main(args):
                 ratings = json.loads(text)
                 text = json.dumps(ratings, indent=4)
                 rating = ratings["overall_rating"]["rating"]
-
-                # sum = 0
-                # total = 0
-
-                # for key, value in ratings.items():
-                #     # explanation = value["explanation"]
-                #     rating = value["rating"]
-                #     sum += float(rating)
-                #     total += 1
-
-                # rating = sum / total
-                # rating = get_rating(text)
                 pending_data[idx]["judgement"] = text
                 pending_data[idx]["rating"] = float(rating)
                 pending_data[idx]["judgement_pending"] = False
@@ -223,11 +211,21 @@ def main(args):
                 pending_data[idx]["rated_by"] = judge_model
                 print("text failed type error", text, -1, e)
             except ValueError as e:
-                pending_data[idx]["judgement"] = text + "Exception:" + str(e)
-                pending_data[idx]["rating"] = -1
-                pending_data[idx]["judgement_pending"] = False
-                pending_data[idx]["rated_by"] = judge_model
-                print("text failed", text, -1, e)
+                pattern = r'"rating"\s*:\s*(\d+(\.\d+)?)'
+                match = re.search(pattern, text)
+
+                if match:
+                    rating = float(match.group(1))
+                    pending_data[idx]["judgement"] = text
+                    pending_data[idx]["rating"] = float(rating)
+                    pending_data[idx]["judgement_pending"] = False
+                    pending_data[idx]["rated_by"] = judge_model
+                else:
+                    pending_data[idx]["judgement"] = text + "Exception:" + str(e)
+                    pending_data[idx]["rating"] = -1
+                    pending_data[idx]["judgement_pending"] = False
+                    pending_data[idx]["rated_by"] = judge_model
+                    print("text failed", text, -1, e)
         except Exception as e:
             print("failed ", e)
 
