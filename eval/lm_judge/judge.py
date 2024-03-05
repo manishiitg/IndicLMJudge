@@ -1,14 +1,8 @@
 from tqdm import tqdm
 import argparse
-import os
-import random
 import torch
 import json
 from datasets import load_dataset
-from eval.utils import (
-    dynamic_import_function,
-)
-from huggingface_hub import HfApi
 from transformers import AutoTokenizer
 import vllm
 from datasets import Dataset
