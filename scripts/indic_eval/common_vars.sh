@@ -15,6 +15,7 @@ model_names=(
     # "sarvamai/OpenHathi-7B-Hi-v0.1-Base"
     # "manishiitg/open-aditi-hi-v3-dpo-awq"
     # "manishiitg/open-aditi-hi-v5"
-    "manishiitg/open-aditi-chat-hi-1.91-awq"
+    # "manishiitg/open-aditi-chat-hi-1.91-awq"
+    "manishiitg/open-aditi-chat-hi-1.92-awq"
 )
 FOLDER_BASE=/sky-notebook/eval-results
