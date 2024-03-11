@@ -8,6 +8,8 @@ Evaluation Dataset : https://huggingface.co/datasets/manishiitg/human_eval
 Final Results are published at https://huggingface.co/datasets/manishiitg/llm_judge
 
 
+To evaluate your own model add it add https://github.com/manishiitg/IndicLMJudge/blob/main/scripts/indic_eval/common_vars.sh 
+and simply `bash scripts/llmjudge.sh`
 
  #### LLM Judge Language: hi 
  | Model | Language | Score | No# Questions |
