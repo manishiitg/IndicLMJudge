@@ -9,7 +9,7 @@ Final Results are published at https://huggingface.co/datasets/manishiitg/llm_ju
 
 
 To evaluate your own model add it add https://github.com/manishiitg/IndicLMJudge/blob/main/scripts/indic_eval/common_vars.sh 
-and simply `bash scripts/llmjudge.sh`
+and simply `bash scripts/lmjudge.sh`
 
  #### LLM Judge Language: hi 
  | Model | Language | Score | No# Questions |
