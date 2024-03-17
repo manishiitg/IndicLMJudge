@@ -32,7 +32,7 @@ Creativity: The originality and novelty of the response.
 Level of Detail: The amount of information provided in the response.
 Formatting and Presentation: How well the response was presented to the user. 
 
-If input prompt is in hindi and response is in english, give overall rating as 0
+If the question is in hindi and answer is in english, give overall rating as 0
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
 
