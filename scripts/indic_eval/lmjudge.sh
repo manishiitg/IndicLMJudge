@@ -26,6 +26,9 @@ for model_name_or_path in "${model_names[@]}"; do
     if echo "$model_name" | grep -qi "OpenHathi-7B-Hi-v0.1-Base"; then
         template_format="eval.templates.create_prompt_with_llama2_chat_format"
     fi
+    if echo "$model_name" | grep -qi "OpenHermes"; then
+        template_format="eval.templates.create_prompt_with_chatml_format"
+    fi
     if [ "$check_file_existence" = false ] || [ ! -f "$FILE" ]; then
         python3 -m eval.lm_judge.run_eval \
             --save_dir $FOLDER \
