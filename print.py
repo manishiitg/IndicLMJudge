@@ -24,6 +24,8 @@ def generateLMJudge():
     scores = {}
     for row in final_data:
         if not row["judgement_pending"] and row["rating"] != -1:
+            if row["type"] == "unalign":
+                continue
             model_name = row["model_name"]
             # if model_name in skip_model or "awq" in model_name:
             #     continue
