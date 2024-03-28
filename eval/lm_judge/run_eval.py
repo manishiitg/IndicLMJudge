@@ -75,8 +75,8 @@ def main(args):
 
         lang = example["lang"]
         system = default_system_en
-        if lang == "hi":
-            system = default_system_hi
+        # if lang == "hi":
+        #     system = default_system_hi
 
         if example["type"] == "gpt4-multi-turn-hi" or "mt_bench-" in example["type"]:
             mt_idx[idx] = {
