@@ -66,7 +66,7 @@ def main(args):
     mt_idx = {}
 
     default_system_en = "You are a helpful assistant."
-    default_system_hi = "आप एक सहायक सहायक हैं."
+    default_system_hi = "You are a helpful assistant."
 
     processed_row = []
     idx = 0
@@ -75,8 +75,8 @@ def main(args):
 
         lang = example["lang"]
         system = default_system_en
-        # if lang == "hi":
-        #     system = default_system_hi
+        if lang == "hi":
+            system = default_system_hi
 
         if example["type"] == "gpt4-multi-turn-hi" or "mt_bench-" in example["type"]:
             mt_idx[idx] = {
