@@ -60,6 +60,9 @@ def main(args):
 
     tokenizer = AutoTokenizer.from_pretrained(
         args.tokenizer_name_or_path if args.tokenizer_name_or_path else args.model_name_or_path)
+    if "gemma" in args.tokenizer_name_or_path:
+        tokenizer = AutoTokenizer.from_pretrained("philschmid/gemma-tokenizer-chatml")
+
     prompts = []
     simple_prompts = []
 
