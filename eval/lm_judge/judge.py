@@ -141,7 +141,8 @@ def main(args):
     if count == 0:
         return
 
-    judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
+    # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
+    judge_model = "Qwen/Qwen1.5-7B-Chat-AWQ"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
