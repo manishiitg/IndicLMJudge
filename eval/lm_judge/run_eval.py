@@ -67,6 +67,10 @@ def main(args):
 
     default_system_en = "You are a helpful assistant."
     default_system_hi = "You are a helpful assistant."
+    translate = {
+        "दिए गए विषय पर एक ब्लॉग लिखें": "Write a blog on a given topic",
+        "आप एक सहायक हैं। कृपया एक लंबा और विस्तृत उत्तर दें।": "You are a helper. Please give a long and detailed answer.",
+    }
 
     processed_row = []
     idx = 0
@@ -92,6 +96,14 @@ def main(args):
 
         else:
             messages = json.loads(example["messages"])
+            system = ""
+            for msg in messages:
+                if msg["role"] == "system":
+                    system = msg["content"]
+                    break
+
+            if len(system) > 0 and system in translate:
+                messages[0]["content"] = translate[system]
 
         if args.model_name_or_path == "mistralai/Mixtral-8x7B-Instruct-v0.1":
             if lang != "en":
