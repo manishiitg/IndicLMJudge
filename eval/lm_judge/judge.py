@@ -55,7 +55,7 @@ Your evaluation should take into account several factors, including helpfulness,
 
 Please rate the response on a scale of 1 to 10 for each of the following evaluation factors:
 
-IsHindi: degree of usage of hindi language. if reponse in english language, should be given zero rating.
+
 Helpfulness: The degree to which the response addresses the user's question or need.
 Relevance: The extent to which the response is related to the user's question or topic.
 Accuracy: The correctness of the information provided in the response.
@@ -65,6 +65,7 @@ Level of Detail: The amount of information provided in the response.
 Formatting and Presentation: How well the response was presented to the user. 
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
+Degree of usage of hindi language. if reponse in english language, overall rating should be zero as response is expected in hindi.
 
 Only respond in json format as follows:
 {
@@ -137,8 +138,6 @@ def get_lm_judge_rating_prompt(question, answer, language):
     if language == "hi":
         prompt_1 = prompt_hindi.replace("{question}", question)
         prompt_1 = prompt_1.replace("{answer}", answer)
-
-        print("prompt_1", prompt_1)
     else:
         prompt_1 = prompt.replace("{question}", question)
         prompt_1 = prompt_1.replace("{answer}", answer)
