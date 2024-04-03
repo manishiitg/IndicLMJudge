@@ -175,8 +175,8 @@ def main(args):
         if row["judgement_pending"]:
             count = count + 1
 
-    if count == 0:
-        return
+    # if count == 0:
+    #     return
 
     # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
     judge_model = "Qwen/Qwen1.5-7B-Chat-AWQ"
