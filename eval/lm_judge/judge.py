@@ -43,6 +43,38 @@ Only respond in json format as follows:
 }
 Response format should be parsable by json.loads
 """
+
+prompt_hindi = """
+As an impartial evaluator, please assess the quality of the AI assistant's response to the user's question below. 
+Your evaluation should take into account several factors, including helpfulness, relevance, accuracy, depth, creativity, and level of detail. 
+
+[Question]
+{question}
+[AI Assistant's Response]
+{answer}
+
+Please rate the response on a scale of 1 to 10 for each of the following evaluation factors:
+
+IsHindi: degree of usage of hindi language. if reponse in english language, should be given zero rating.
+Helpfulness: The degree to which the response addresses the user's question or need.
+Relevance: The extent to which the response is related to the user's question or topic.
+Accuracy: The correctness of the information provided in the response.
+Depth: The level of detail and comprehensiveness of the response.
+Creativity: The originality and novelty of the response.
+Level of Detail: The amount of information provided in the response.
+Formatting and Presentation: How well the response was presented to the user. 
+
+Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
+
+Only respond in json format as follows:
+{
+  "overall_rating": {
+    "explanation" : "<explanation>",
+    "rating" : "<rating>",
+  },
+}
+Response format should be parsable by json.loads
+"""
 # If an evaluation criteria is not valid for a question, add the rating as -1
 # "helpfulness": {
 #     "explanation" : "<explanation>",
@@ -101,9 +133,13 @@ def get_rating(output):
         raise ValueError()
 
 
-def get_lm_judge_rating_prompt(question, answer):
-    prompt_1 = prompt.replace("{question}", question)
-    prompt_1 = prompt_1.replace("{answer}", answer)
+def get_lm_judge_rating_prompt(question, answer, language):
+    if language == "hi":
+        prompt_1 = prompt_hindi.replace("{question}", question)
+        prompt_1 = prompt_1.replace("{answer}", answer)
+    else:
+        prompt_1 = prompt.replace("{question}", question)
+        prompt_1 = prompt_1.replace("{answer}", answer)
     return prompt_1
 
 
@@ -129,6 +165,7 @@ def eval_hf_model(args, model, tokenizer, prompts):
 def main(args):
 
     ds = load_dataset("manishiitg/llm_judge", split="train")
+    ds = ds.filter(lambda x: x["model_name"] == "google/gemma-2b-it").filter(lambda x: x["lang"] == "hi").shuffle(range(10))
     final_data = []
     for row in ds:
         final_data.append(row)
@@ -156,18 +193,17 @@ def main(args):
         max_model_len=4096,
         dtype="float16",
         gpu_memory_utilization=.8
-
     )
 
     prompts = []
     completed_data = []
     pending_data = []
     for row in tqdm(final_data):
-        if row["judgement_pending"] or row["rating"] == -1:
+        if row["judgement_pending"] or row["rating"] == -1 or row["model_name"] == "google/gemma-2b-it":
             instruction = row["simple_prompt"]
             answer = row["response"]
             prompt = get_lm_judge_rating_prompt(
-                question=instruction, answer=answer)
+                question=instruction, answer=answer, language=row["lang"])
 
             messages = [
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -220,6 +256,9 @@ def main(args):
         except Exception as e:
             print("failed ", e)
 
+        print("--------")
+        print(pending_data[idx])
+    os.exit(1)
     final_data = pending_data + completed_data
     dataset = process_and_update_dataset(final_data)
     dataset.push_to_hub("manishiitg/llm_judge", private=False)

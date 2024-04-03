@@ -16,7 +16,7 @@ debug_print = False
 
 
 def create_prompt_by_template(messages, tokenizer, args):
-    if "mistralai/Mixtral-8x7B-Instruct-v0.1" == args.tokenizer_name_or_path:
+    if "google/gemma" in args.tokenizer_name_or_path or "mistralai/Mixtral-8x7B-Instruct-v0.1" == args.tokenizer_name_or_path:
         if "system" == messages[0]["role"]:
             system = messages[0]["content"]
             del messages[0]
