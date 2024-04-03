@@ -257,7 +257,8 @@ def main(args):
             print("failed ", e)
 
         print("--------")
-        print(pending_data[idx])
+        for k, v in pending_data[idx]:
+            print(k, v)
     os.exit(1)
     final_data = pending_data + completed_data
     dataset = process_and_update_dataset(final_data)
