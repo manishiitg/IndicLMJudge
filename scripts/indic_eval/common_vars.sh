@@ -1,7 +1,8 @@
 #!/bin/bash
 
 model_names=(
-    # "google/gemma-7b-it"
+    "google/gemma-7b-it"
+    "google/gemma-2b-it"
     # "Qwen/Qwen1.5-72B-Chat-AWQ"
     # "Qwen/Qwen1.5-7B-Chat"
     # "01-ai/Yi-34B-Chat"
