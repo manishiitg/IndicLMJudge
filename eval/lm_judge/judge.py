@@ -137,6 +137,8 @@ def get_lm_judge_rating_prompt(question, answer, language):
     if language == "hi":
         prompt_1 = prompt_hindi.replace("{question}", question)
         prompt_1 = prompt_1.replace("{answer}", answer)
+
+        print("prompt_1", prompt_1)
     else:
         prompt_1 = prompt.replace("{question}", question)
         prompt_1 = prompt_1.replace("{answer}", answer)
