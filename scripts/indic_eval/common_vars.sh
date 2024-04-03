@@ -23,5 +23,6 @@ model_names=(
     "manishiitg/open-aditi-chat-hi-1.96-merged"
     "manishiitg/open-aditi-chat-hi-1.96-gemma-merged"
     "manishiitg/open-aditi-chat-hi-1.97-gemma-merged"
+    "manishiitg/open-aditi-chat-hi-1.98-gemma-merged"
 )
 FOLDER_BASE=/sky-notebook/eval-results
