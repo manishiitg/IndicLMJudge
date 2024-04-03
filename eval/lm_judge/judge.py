@@ -65,7 +65,7 @@ Level of Detail: The amount of information provided in the response.
 Formatting and Presentation: How well the response was presented to the user. 
 
 Calculate an overall rating based on above factors and also provide an detailed explanation for the overall rating.
-Degree of usage of hindi language. if reponse in english language, overall rating should be zero as response is expected in hindi.
+If reponse in english language, overall rating should be zero as response is expected in hindi language.
 
 Only respond in json format as follows:
 {
