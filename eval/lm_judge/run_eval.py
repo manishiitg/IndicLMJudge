@@ -24,7 +24,7 @@ def eval_hf_model(args, model, tokenizer, prompts):
     sampling_params = vllm.SamplingParams(
         temperature=0,
         max_tokens=2048,
-        stop=["<|im_end|>","<eos>"],
+        stop=["<|im_end|>", "<eos>"],
     )
     # We need to remap the outputs to the prompts because vllm might not return outputs for some prompts (e.g., if the prompt is too long)
     generations = model.generate(prompts, sampling_params)
@@ -60,7 +60,7 @@ def main(args):
 
     tokenizer = AutoTokenizer.from_pretrained(
         args.tokenizer_name_or_path if args.tokenizer_name_or_path else args.model_name_or_path)
-    if "gemma" in args.tokenizer_name_or_path:
+    if "gemma" in args.tokenizer_name_or_path and "google" not in args.tokenizer_name_or_path:
         tokenizer = AutoTokenizer.from_pretrained("philschmid/gemma-tokenizer-chatml")
 
     prompts = []
