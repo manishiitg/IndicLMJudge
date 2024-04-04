@@ -111,7 +111,7 @@ def get_lm_judge_rating_prompt(question, answer):
 def eval_hf_model(args, model, tokenizer, prompts):
     sampling_params = vllm.SamplingParams(
         temperature=0,
-        max_tokens=512,
+        max_tokens=1024,
         stop=["<|im_end|>"],
     )
     # We need to remap the outputs to the prompts because vllm might not return outputs for some prompts (e.g., if the prompt is too long)
@@ -141,8 +141,8 @@ def main(args):
     if count == 0:
         return
 
-    # judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
-    judge_model = "Qwen/Qwen1.5-7B-Chat-AWQ"
+    judge_model = "Qwen/Qwen1.5-72B-Chat-AWQ"
+    # judge_model = "Qwen/Qwen1.5-7B-Chat-AWQ"
     tokenizer = AutoTokenizer.from_pretrained(judge_model)
 
     print("Loading model and tokenizer vllm awq...")
