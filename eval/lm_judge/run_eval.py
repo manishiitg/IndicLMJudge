@@ -58,10 +58,11 @@ def main(args):
             if row["model_name"] == args.model_name_or_path:
                 existing_data[row["prompt"]] = True
 
+    if "gemma" in args.tokenizer_name_or_path and "google" not in args.tokenizer_name_or_path:
+        args.tokenizer_name_or_path = "philschmid/gemma-tokenizer-chatml"
+
     tokenizer = AutoTokenizer.from_pretrained(
         args.tokenizer_name_or_path if args.tokenizer_name_or_path else args.model_name_or_path)
-    if "gemma" in args.tokenizer_name_or_path and "google" not in args.tokenizer_name_or_path:
-        tokenizer = AutoTokenizer.from_pretrained("philschmid/gemma-tokenizer-chatml")
 
     prompts = []
     simple_prompts = []
