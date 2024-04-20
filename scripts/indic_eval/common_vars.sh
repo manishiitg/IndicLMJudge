@@ -2,7 +2,7 @@
 
 model_names=(
     # "google/gemma-7b-it"
-    "google/gemma-2b-it"
+    # "google/gemma-2b-it"
     # "Qwen/Qwen1.5-72B-Chat-AWQ"
     # "Qwen/Qwen1.5-7B-Chat"
     # "01-ai/Yi-34B-Chat"
@@ -36,6 +36,7 @@ model_names=(
     # "manishiitg/open-aditi-chat-hi-1.25-llama3-merged"
     "manishiitg/open-aditi-v6-llama3"
     "manishiitg/open-aditi-v6-gemma"
+    "manishiitg/open-aditi-chat-hi-1.26-llama3-merged"
 
 )
 FOLDER_BASE=/sky-notebook/eval-results
